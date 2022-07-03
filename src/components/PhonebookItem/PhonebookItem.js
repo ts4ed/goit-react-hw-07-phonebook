@@ -1,19 +1,21 @@
 import s from './PhonebookItem.module.css';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
-// // import { deleteContacts } from 'redux/contactsSlice';
+import { useDeleteContactMutation } from 'redux/contacts/contactsSlice';
 
 export default function PhonebookItem({ id, name, number }) {
-  // const dispatch = useDispatch();
+  const [deleteContact, { isLoading: isDeleting }] = useDeleteContactMutation();
   return (
     <>
       {name}:{number}
       <button
         className={s.button}
         type="button"
-        // onClick={() => dispatch((id))}
+        onClick={() => deleteContact(id)}
       >
-        Delete
+        {isDeleting ? 'Deleting....' : 'Delete'}
+      </button>
+      <button className={s.button} type="button">
+        Сhange
       </button>
     </>
   );
