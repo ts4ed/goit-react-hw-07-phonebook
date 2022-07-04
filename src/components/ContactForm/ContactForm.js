@@ -1,4 +1,6 @@
-import { useCreateContactMutation } from 'redux/contacts/contactsSlice';
+import { useCreateContactMutation } from 'redux/contacts/contactsApi';
+import { useFetchContactsQuery } from 'redux/contacts/contactsApi';
+
 import useLocalStorage from 'hooks/useLocalStorage';
 import s from './ContactForm.module.css';
 
@@ -6,6 +8,7 @@ export default function ContactForm() {
   const [name, setName] = useLocalStorage('name', '');
   const [number, setNumber] = useLocalStorage('number', '');
   const [createContact, { isLoading: isCreating }] = useCreateContactMutation();
+  const { data } = useFetchContactsQuery();
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -13,7 +16,15 @@ export default function ContactForm() {
       name: name,
       phone: number,
     };
-    createContact(newContact);
+
+    const isExistContact = data.find(data => data.name === name);
+    if (isExistContact) {
+      alert(`${name} is already in contacts`);
+    }
+    if (!isExistContact) {
+      createContact(newContact);
+    }
+
     reset();
   };
   const reset = () => {

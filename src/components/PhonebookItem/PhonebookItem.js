@@ -1,6 +1,6 @@
 import s from './PhonebookItem.module.css';
 import PropTypes from 'prop-types';
-import { useDeleteContactMutation } from 'redux/contacts/contactsSlice';
+import { useDeleteContactMutation } from 'redux/contacts/contactsApi';
 
 export default function PhonebookItem({ id, name, number }) {
   const [deleteContact, { isLoading: isDeleting }] = useDeleteContactMutation();
@@ -15,9 +15,9 @@ export default function PhonebookItem({ id, name, number }) {
       >
         {isDeleting ? 'Deleting....' : 'Delete'}
       </button>
-      <button className={s.button} type="button">
+      {/* <button className={s.button} type="button">
         Сhange
-      </button>
+      </button> */}
     </>
   );
 }
