@@ -19,8 +19,8 @@ export const contactsApi = createApi({
           name: newContact.name,
           phone: newContact.phone,
         }),
-        providesTags: ['Contact'],
       }),
+      invalidatesTags: ['Contact'],
     }),
     deleteContact: builder.mutation({
       query: contactId => ({

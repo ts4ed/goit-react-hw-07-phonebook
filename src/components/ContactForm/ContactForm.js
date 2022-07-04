@@ -9,7 +9,7 @@ export default function ContactForm() {
   const [name, setName] = useLocalStorage('name', '');
   const [number, setNumber] = useLocalStorage('number', '');
   const [createContact, { isLoading: isCreating }] = useCreateContactMutation();
-  const { data, refetch } = useFetchContactsQuery();
+  const { data } = useFetchContactsQuery();
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -26,7 +26,7 @@ export default function ContactForm() {
       try {
         await createContact(newContact);
         toast.success(`${name} add in contacts`);
-        refetch();
+        // refetch();
       } catch (error) {}
     }
 
