@@ -29,6 +29,10 @@ export const contactsApi = createApi({
       }),
       invalidatesTags: ['Contact'],
     }),
+    // filterContact: builder.query({
+    //   query: name => `/contacts/`,
+    //   providesTags: ['Contact'],
+    // }),
   }),
 });
 
@@ -36,4 +40,5 @@ export const {
   useFetchContactsQuery,
   useDeleteContactMutation,
   useCreateContactMutation,
+  // useFilterContactQuery,
 } = contactsApi;

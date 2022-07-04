@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+// import { useFilterContactQuery } from '../contacts/contactsApi';
 
 export const contactsSlice = createSlice({
   name: 'contacts',
