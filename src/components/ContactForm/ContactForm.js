@@ -1,16 +1,17 @@
 import { useCreateContactMutation } from 'redux/contacts/contactsApi';
 import { useFetchContactsQuery } from 'redux/contacts/contactsApi';
-
+import { toast } from 'react-toastify';
 import useLocalStorage from 'hooks/useLocalStorage';
+import 'react-toastify/dist/ReactToastify.css';
 import s from './ContactForm.module.css';
 
 export default function ContactForm() {
   const [name, setName] = useLocalStorage('name', '');
   const [number, setNumber] = useLocalStorage('number', '');
   const [createContact, { isLoading: isCreating }] = useCreateContactMutation();
-  const { data } = useFetchContactsQuery();
+  const { data, refetch } = useFetchContactsQuery();
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     const newContact = {
       name: name,
@@ -19,10 +20,14 @@ export default function ContactForm() {
 
     const isExistContact = data.find(data => data.name === name);
     if (isExistContact) {
-      alert(`${name} is already in contacts`);
+      toast.error(`${name} is already in contacts`);
     }
     if (!isExistContact) {
-      createContact(newContact);
+      try {
+        await createContact(newContact);
+        toast.success(`${name} add in contacts`);
+        refetch();
+      } catch (error) {}
     }
 
     reset();
