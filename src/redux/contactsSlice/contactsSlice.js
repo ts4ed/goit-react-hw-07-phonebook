@@ -12,7 +12,6 @@ export const contactsSlice = createSlice({
   },
 });
 
-export const getContacts = state => state.contacts.items;
 export const getFilter = state => state.contacts.filter;
 export const contactsFiltered = (contacts, filter) =>
   contacts.filter(contact =>

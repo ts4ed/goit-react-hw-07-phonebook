@@ -6,7 +6,7 @@ export default function PhonebookItem({ id, name, number }) {
   const [deleteContact, { isLoading: isDeleting }] = useDeleteContactMutation();
   return (
     <>
-      {name}:{number}
+      {name} : {number}
       <button
         className={s.button}
         type="button"
