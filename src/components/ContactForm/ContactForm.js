@@ -49,7 +49,11 @@ export default function ContactForm() {
           />
         </label>
 
-        <button className={s.button} type="submit" disabled={!name || !number}>
+        <button
+          className={s.button}
+          type="submit"
+          disabled={!name || !number || isCreating}
+        >
           {isCreating ? 'Сreate a contact....' : 'Add contact'}
         </button>
       </form>

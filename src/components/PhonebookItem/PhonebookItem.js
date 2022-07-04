@@ -11,6 +11,7 @@ export default function PhonebookItem({ id, name, number }) {
         className={s.button}
         type="button"
         onClick={() => deleteContact(id)}
+        disabled={isDeleting}
       >
         {isDeleting ? 'Deleting....' : 'Delete'}
       </button>
