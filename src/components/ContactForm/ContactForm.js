@@ -18,7 +18,9 @@ export default function ContactForm() {
       phone: number,
     };
 
-    const isExistContact = data.find(data => data.name === name);
+    const isExistContact = data.find(
+      data => data.name.toLowerCase() === name.toLowerCase()
+    );
     if (isExistContact) {
       toast.error(`${name} is already in contacts`);
     }
